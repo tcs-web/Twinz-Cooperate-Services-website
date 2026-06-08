@@ -26,8 +26,19 @@
 
   header{background: white;box-shadow: 0 2px 10px rgba(0,0,0,0.05);position: sticky;top:0;z-index:100}
   nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
- .logo{font-size:22px;font-weight:800;color:var(--blue1)}
- .logo span{color:var(--blue3)}
+ .logo img{
+  height:48px;
+  width:auto;
+  display:block;
+  filter: drop-shadow(0 2px 8px rgba(30,64,175,0.3));
+}
+.logo img:hover{
+  transform:scale(1.05);
+  transition:0.2s;
+}
+@media(max-width:768px){
+  .logo img{height:38px;}
+}
  .nav-links{display:flex;gap:24px;list-style:none}
  .nav-links a{color:var(--dark);text-decoration:none;font-weight:500}
  .nav-links a:hover{color:var(--blue2)}
@@ -123,7 +134,7 @@
   <div class="container">
     <nav>
       <a href="#home" class="logo">
-  <img src="tcs-logo.png" alt="Twinz Cooperate Services Pty Ltd">
+  <img src="tcs-logo.png" alt="Twinz Cooperate Services Pty Ltd" />
 </a>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
