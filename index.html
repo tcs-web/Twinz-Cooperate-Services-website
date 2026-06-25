@@ -139,7 +139,9 @@
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#downloads">Documents</a></li>
+        <li><a href="#downloads">Documents</a><div style="text-align:right;margin-bottom:20px">
+  <button onclick="lockDocs()" style="padding:8px 16px;background:#dc2626;color:white;border:none;border-radius:8px;cursor:pointer;font-size:13px">🔒 Lock Docs</button>
+</div></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -147,6 +149,18 @@
   </div>
 </header>
 
+<!-- PIN LOGIN OVERLAY -->
+<div id="pinLock" style="background:white;padding:60px 20px;text-align:center">
+  <div style="max-width:400px;margin:0 auto;background:#f8fafc;padding:40px;border-radius:18px;border:2px solid #2563eb">
+    <h2 style="color:#1e40af;margin-bottom:16px">🔒 Tender Documents Locked</h2>
+    <p style="color:#64748b;margin-bottom:24px">Enter admin PIN to view, copy or download company docs</p>
+    <input type="password" id="pinInput" placeholder="Enter PIN" style="width:100%;padding:14px;border:2px solid #e2e8f0;border-radius:10px;font-size:16px;margin-bottom:12px;text-align:center">
+    <button onclick="checkPIN()" style="width:100%;padding:14px;background:linear-gradient(135deg,#1e40af 0%,#2563eb 100%);color:white;border:none;border-radius:12px;font-weight:700;cursor:pointer">Unlock Documents</button>
+    <p id="pinError" style="color:#dc2626;margin-top:12px;font-size:14px;display:none">Wrong PIN. Try again.</p>
+    <p style="font-size:12px;color:#94a3b8;margin-top:20px">Only Twinz Admin has access</p>
+  </div>
+</div>
+  
 <section class="hero" id="home">
   <div class="container">
     <h1>Twinz Cooperate Services Pty Ltd</h1>
@@ -245,7 +259,8 @@
     </div>
   </div>
 </section>
-
+  
+<div id="documentsContent" style="display:none">
 <section class="downloads" id="downloads">
   <div class="container">
     <h2 class="section-title">Tender Documents & Downloads</h2>
@@ -257,6 +272,7 @@
         <h4>Company Profile 2026</h4>
         <p>2-page full company overview for tenders</p>
         <button onclick="openModal('profile')" class="btn-pdf" style="margin-top:12px;width:100%">View & Copy Text</button>
+        <button onclick="copyText('profile')" style="padding:10px 20px;background:var(--green);color:white;border:none;border-radius:8px;cursor:pointer;margin-top:10px">📋 Copy All Text</button>
       </div>
 
       <div class="download-card">
@@ -551,61 +567,43 @@ Reg: 2024/444303/07 | VAT: 9819040198</pre>
 </div>
 
 <script>
-// Modal functions
-function openModal(type){
-  document.getElementById(type + 'Modal').style.display = 'flex';
+// SET YOUR PIN HERE - CHANGE THIS TO YOUR SECRET PIN
+const ADMIN_PIN = "2580"; // Change to 4-6 digits only you know
+
+// Check if already unlocked this session
+if(localStorage.getItem('tcsDocsUnlocked') === 'true') {
+  pinLock.style.display = 'none';
+  documentsContent.style.display = 'block';
 }
-function closeModal(type){
-  document.getElementById(type + 'Modal').style.display = 'none';
+
+function copyText(id) {
+  const text = document.querySelector(`#${id}Modal pre`).innerText;
+  navigator.clipboard.writeText(text);
+  alert('✓ Copied! Paste in Word/Canva now');
 }
-window.onclick = function(event){
-  if(event.target.classList.contains('modal')){
-    event.target.style.display = 'none';
+  
+function checkPIN() {
+  if(pinInput.value === ADMIN_PIN) {
+    localStorage.setItem('tcsDocsUnlocked', 'true');
+    pinLock.style.display = 'none';
+    documentsContent.style.display = 'block';
+    pinError.style.display = 'none';
+  } else {
+    pinError.style.display = 'block';
+    pinInput.value = '';
   }
 }
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({behavior: 'smooth'});
-  });
+// Enter key to submit PIN
+pinInput.addEventListener('keypress', e => {
+  if(e.key === 'Enter') checkPIN();
 });
 
-// Contact form to Google Sheets
-const SCRIPT_URL = 'PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE';
-const form = document.getElementById('quoteForm');
-const msg = document.getElementById('formMsg');
-
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  msg.textContent = 'Sending...';
-  msg.style.color = 'var(--blue2)';
-
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData);
-
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {'Content-Type': 'application/json'}
-  })
- .then(res => res.json())
- .then(result => {
-    if(result.status === 'success'){
-      msg.textContent = '✓ Quote request sent! We will WhatsApp you in 10 minutes.';
-      msg.style.color = 'var(--green)';
-      form.reset();
-    } else {
-      msg.textContent = 'Error. Please WhatsApp 068 254 7352 directly.';
-      msg.style.color = 'red';
-    }
-  })
- .catch(() => {
-    msg.textContent = 'Network error. Please WhatsApp 068 254 7352 directly.';
-    msg.style.color = 'red';
-  });
-});
+// Logout button - add this in Documents section top
+function lockDocs() {
+  localStorage.removeItem('tcsDocsUnlocked');
+  location.reload();
+}
 </script>
 
 </body>
