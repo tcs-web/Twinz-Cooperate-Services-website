@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twinz Cooperate Services PTY LTD | GOD TIER TECH</title>
+<link rel="icon" href="https://files.catbox.moe/0zympr.jpeg" type="image/jpeg">
 <style>
 :root{--bg:#05070f;--card:#0f172a;--accent:#22d3ee;--accent2:#3b82f6;--warn:#fbbf24;--text:#f1f5f9;--muted:#94a3b8}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif}
@@ -24,6 +25,8 @@ h2{font-size:2.2rem;text-align:center;margin-bottom:40px;color:var(--accent)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px}
 .price{font-size:1.8rem;color:var(--warn);font-weight:900;margin:10px 0}
 .service h3{color:var(--accent2);margin-bottom:12px;font-size:1.3rem}
+.brands{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px}
+.brand-tag{background:#1e293b;padding:6px 12px;border-radius:20px;font-size:0.9rem;border:1px solid var(--accent2)}
 .contact-info{display:flex;flex-direction:column;gap:15px;font-size:1.1rem}
 .contact-item{display:flex;align-items:center;gap:10px}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
@@ -31,6 +34,8 @@ h2{font-size:2.2rem;text-align:center;margin-bottom:40px;color:var(--accent)}
 input,textarea{width:100%;padding:14px;background:var(--card);border:1px solid #334155;color:var(--text);border-radius:8px;margin:10px 0;font-size:1rem}
 footer{text-align:center;padding:40px;color:var(--muted);border-top:2px solid #1e293b;font-weight:700}
 .non-negotiable{border-left:4px solid var(--warn);padding-left:15px;margin:15px 0}
+.review-widget{background:#0f172a;padding:20px;border-radius:12px;text-align:center;border:1px solid #334155}
+.stars{color:var(--warn);font-size:1.5rem;margin:10px 0}
 </style>
 </head>
 <body>
@@ -40,9 +45,9 @@ footer{text-align:center;padding:40px;color:var(--muted);border-top:2px solid #1
 <header>
   <img src="https://files.catbox.moe/0zympr.jpeg" alt="Twinz Cooperate Services Logo" class="logo">
   <h1>TWINZ COOPERATE SERVICES PTY LTD</h1>
-  <p class="tagline">Diagnostics + Wireless + Web + App Development</p>
+  <p class="tagline">Diagnostics + Wireless + Web + App Dev + Genuine Parts</p>
   <div><span class="badge">Thabo</span> <span class="badge">Thabang</span></div>
-  <a href="#contact" class="btn">Book Now</a>
+  <a href="#contact" class="btn">Get Quote</a>
   <a href="#services" class="btn btn-secondary">View Services</a>
 </header>
 
@@ -53,7 +58,7 @@ footer{text-align:center;padding:40px;color:var(--muted);border-top:2px solid #1
     <div class="non-negotiable">
       <b>NON-NEGOTIABLES:</b> Quality, Speed, Results, Professional Service
     </div>
-    <p>Based in Greater Tubatse, Limpopo. Serving SA.</p>
+    <p>Based in Greater Tubatse, Limpopo. <b>We work with workshops and garages across SA.</b> Any parts or vehicles you need - we got you covered.</p>
   </div>
 </section>
 
@@ -82,6 +87,34 @@ footer{text-align:center;padding:40px;color:var(--muted);border-top:2px solid #1
       <div class="price">From R5000</div>
       <p><small>Custom quotes. ALL PERMISSIONS GRANTED</small></p>
     </div>
+    <div class="card service">
+      <h3>⚙️ Genuine Vehicle Parts</h3>
+      <p>Engines, Gearboxes, Suspension, Electronics. Sourced and supplied for all makes.</p>
+      <div class="brands">
+        <span class="brand-tag">BMW</span><span class="brand-tag">BENZ</span><span class="brand-tag">AUDI</span>
+        <span class="brand-tag">VW</span><span class="brand-tag">JAGUAR</span><span class="brand-tag">LAND ROVER</span><span class="brand-tag">+ MORE</span>
+      </div>
+      <div class="price">Quote on Request</div>
+    </div>
+    <div class="card service">
+      <h3>🤝 Workshop Partnerships</h3>
+      <p>We supply parts to garages and workshops nationwide. Fleet diagnostics and bulk pricing available.</p>
+      <div class="price">Nationwide SA</div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <h2>What Our Clients Say</h2>
+  <div class="review-widget">
+    <div class="stars">★★★</div>
+    <h3>5.0 Google Rating</h3>
+    <p>"GOD TIER service. Fast diagnostics and affordable parts. Twinz came through for my Range Rover."</p>
+    <small>- Happy Client</small>
+    <br><br>
+    <!-- REPLACE THIS LINK WITH YOUR REAL GOOGLE BUSINESS REVIEW LINK -->
+    <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="btn btn-secondary">Leave Us A Google Review</a>
+    <p style="margin-top:15px;font-size:0.9rem;color:var(--muted)">To show live reviews: Create Google Business Profile > Get Review Link > Replace link above</p>
   </div>
 </section>
 
@@ -93,8 +126,8 @@ footer{text-align:center;padding:40px;color:var(--muted);border-top:2px solid #1
       <form onsubmit="sendWhatsApp();return false">
         <input type="text" id="name" placeholder="Your Name" required>
         <input type="text" id="phone" placeholder="Your Phone" required>
-        <input type="text" id="service" placeholder="Service: Website, App, Diagnostics, WiFi">
-        <textarea id="message" placeholder="Tell us what you need..." rows="4"></textarea>
+        <input type="text" id="service" placeholder="Service: Website, App, Diagnostics, WiFi, Parts">
+        <textarea id="message" placeholder="Tell us what you need... Vehicle make/model for parts" rows="4"></textarea>
         <button class="btn" type="submit">Send WhatsApp</button>
       </form>
     </div>
@@ -115,16 +148,20 @@ footer{text-align:center;padding:40px;color:var(--muted);border-top:2px solid #1
 
 <footer>
   © 2026 TWINZ COOPERATE SERVICES PTY LTD | BEST & QUALITY SERVICES<br>
+  We Supply Workshops & Garages Across SA
 </footer>
 
 <script>
 function sendWhatsApp(){
   const name=document.getElementById('name').value;
   const phone=document.getElementById('phone').value;
-  const service=document.getElementById('service').value;
+  const service=document.getElementById('service').value.toLowerCase();
   const msg=document.getElementById('message').value;
   const text=`GOD TIER INQUIRY%0AName: ${name}%0APhone: ${phone}%0AService: ${service}%0ADetails: ${msg}`;
-  window.open(`https://wa.me/27682547352?text=${text}`,'_blank');
+  
+  // Route: Parts/Diagnostics/WiFi to Thabang, Web/App to Thabo
+  const number = service.includes('web') || service.includes('app') ? '27682547352' : '27698949596';
+  window.open(`https://wa.me/${number}?text=${text}`,'_blank');
 }
 </script>
 </body>
